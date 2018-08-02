@@ -80,7 +80,6 @@ public class GoogleSearchJava {
 
 		List<GoogleResultDTO> searchResult = new ArrayList<GoogleResultDTO>();
 		Document doc = Jsoup.connect(searchURL).userAgent("Mozilla/5.0").get();
-		System.out.println("Doc: " + doc);
 		Elements results = doc.select(cssQuery);
 		System.out.println("Result: " + results);
 
@@ -108,7 +107,6 @@ public class GoogleSearchJava {
 			}
 		} else if (cssQuery.equals(BaseJSoupConstant.CSS_PRICE_QUERY.getValue())) {
 			Elements priceList = doc.select(BaseJSoupConstant.CSS_PRICE_QUERY.getValue()).after("$");
-			System.out.println("PriceList--> " + priceList);
 			for (Element price : priceList) {
 				GoogleResultDTO googleResultDTO = new GoogleResultDTO();
 				String prices = price.text();
@@ -132,7 +130,7 @@ public class GoogleSearchJava {
 	}
 
 	enum BaseJSoupConstant {
-		CSS_QUERY_FOR_URL("h3.r > a"), CSS_QUERY_IMAGE("[src]"), CSS_PRICE_QUERY("[span]");
+		CSS_QUERY_FOR_URL("h3.r > a"), CSS_QUERY_IMAGE("[src]"), CSS_PRICE_QUERY("div");
 
 		private String value;
 
