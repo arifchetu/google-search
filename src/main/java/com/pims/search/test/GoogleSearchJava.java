@@ -81,7 +81,6 @@ public class GoogleSearchJava {
 		List<GoogleResultDTO> searchResult = new ArrayList<GoogleResultDTO>();
 		Document doc = Jsoup.connect(searchURL).userAgent("Mozilla/5.0").get();
 		Elements results = doc.select(cssQuery);
-		System.out.println("Result: " + results);
 
 		if (cssQuery.equals(BaseJSoupConstant.CSS_QUERY_FOR_URL.getValue())) {
 
@@ -107,6 +106,7 @@ public class GoogleSearchJava {
 			}
 		} else if (cssQuery.equals(BaseJSoupConstant.CSS_PRICE_QUERY.getValue())) {
 			Elements priceList = doc.select(BaseJSoupConstant.CSS_PRICE_QUERY.getValue()).after("$");
+			System.out.println("PriceList--> " + priceList);
 			for (Element price : priceList) {
 				GoogleResultDTO googleResultDTO = new GoogleResultDTO();
 				String prices = price.text();
